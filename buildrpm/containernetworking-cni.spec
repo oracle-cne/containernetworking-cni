@@ -37,8 +37,7 @@ This is the minimal CNI configuration for Kubernetes.
 
 %build
 
-chmod +x build_linux.sh
-./build_linux.sh
+go build cnitool/main.go
 
 %install
 install -m 755 -d %{buildroot}/opt/cni
