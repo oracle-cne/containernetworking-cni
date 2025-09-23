@@ -1,4 +1,4 @@
-@Library('olcne-pipeline@1-test-debug') _
+@Library('olcne-pipeline') _
 import com.oracle.olcne.pipeline.BranchPattern
 
 String version = "1.3.0";
