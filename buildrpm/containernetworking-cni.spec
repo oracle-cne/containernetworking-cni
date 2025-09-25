@@ -6,7 +6,6 @@
 %global debug_package   %{nil}
 %endif
 
-%global golang_version  1.22.5
 %global _buildhost	build-ol%{?oraclelinux}-%{?_arch}.oracle.com
 
 Name:           containernetworking-cni 
@@ -18,7 +17,7 @@ License:        Apache-2.0
 Group:          System/Management
 Url:            https://github.com/containernetworking/plugins
 Source:         %{name}-%{version}.tar.bz2
-BuildRequires:  golang >= %{golang_version}
+BuildRequires:  golang
 Requires:       flannel-cni-plugin >= 1.2.0
 
 %description
@@ -36,8 +35,10 @@ This is the minimal CNI configuration for Kubernetes.
 %setup -q -n %{name}-%{version}
 
 %build
+GOPATH=$(pwd)
+mkdir -p ${GOPATH}/bin
 
-go build cnitool/main.go
+go build -trimpath=false -v -o ${GOPATH}/bin/cnitool -ldflags "-X main.VERSION=v%{version}" ${GOPATH}/cnitool/main.go
 
 %install
 install -m 755 -d %{buildroot}/opt/cni
