@@ -37,8 +37,8 @@ This is the minimal CNI configuration for Kubernetes.
 %build
 GOPATH=$(pwd)
 mkdir -p ${GOPATH}/bin
-
-go build -trimpath=false -v -o ${GOPATH}/bin/cnitool -ldflags "-X main.VERSION=v%{version}" ${GOPATH}/cnitool/main.go
+ls -lrt 
+go build -trimpath=false -v -o ${GOPATH}/bin/cnitool -ldflags "-X main.VERSION=v%{version}" ${GOPATH}/cnitool
 
 %install
 install -m 755 -d %{buildroot}/opt/cni
