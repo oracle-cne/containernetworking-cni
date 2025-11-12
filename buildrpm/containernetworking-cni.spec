@@ -1,0 +1,53 @@
+
+%if 0%{?with_debug}
+# https://bugzilla.redhat.com/show_bug.cgi?id=995136#c12
+%global _dwz_low_mem_die_limit 0
+%else
+%global debug_package   %{nil}
+%endif
+
+%global _buildhost	build-ol%{?oraclelinux}-%{?_arch}.oracle.com
+
+Name:           containernetworking-cni 
+Version:        1.3.0
+Release:        1%{dist}
+Summary:        Container Network Interface Plugins - networking plugins for Linux containers
+Vendor:         Oracle America
+License:        Apache-2.0
+Group:          System/Management
+Url:            https://github.com/containernetworking/plugins
+Source:         %{name}-%{version}.tar.bz2
+BuildRequires:  golang
+Requires:       flannel-cni-plugin >= 1.2.0
+
+%description
+The CNI (Container Network Interface) project consists of a
+specification and libraries for writing plugins to configure
+network interfaces in Linux containers, along with a number of
+supported plugins. CNI concerns itself only with network
+connectivity of containers and removing allocated resources when
+the container is deleted. Because of this focus, CNI has a wide
+range of support and the specification is simple to implement.
+
+This is the minimal CNI configuration for Kubernetes.
+
+%prep
+%setup -q -n %{name}-%{version}
+
+%build
+GOPATH=$(pwd)
+mkdir -p ${GOPATH}/bin
+ls -lrt 
+go build -trimpath=false -v -o ${GOPATH}/bin/cnitool -ldflags "-X main.VERSION=v%{version}" ${GOPATH}/cnitool
+
+%install
+install -m 755 -d %{buildroot}/opt/cni
+mv bin/ %{buildroot}/opt/cni/
+
+%files
+%license LICENSE THIRD_PARTY_LICENSES.txt
+/opt/cni
+
+%changelog
+* Fri Sep 19 2025 Olcne-Builder Jenkins <olcne-builder_us@oracle.com> - 1.3.0-1
+- Added Oracle specific build files for Kubernetes CNI Plugins
