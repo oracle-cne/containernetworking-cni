@@ -10,7 +10,7 @@
 
 Name:           containernetworking-cni 
 Version:        1.3.0
-Release:        1%{dist}
+Release:        2%{dist}
 Summary:        Container Network Interface Plugins - networking plugins for Linux containers
 Vendor:         Oracle America
 License:        Apache-2.0
@@ -19,6 +19,9 @@ Url:            https://github.com/containernetworking/plugins
 Source:         %{name}-%{version}.tar.bz2
 BuildRequires:  golang
 Requires:       flannel-cni-plugin >= 1.2.0
+
+Provides: kubernetes-cni = %{version}-%{release}
+Obsoletes: kubernetes-cni < 1.3.0
 
 %description
 The CNI (Container Network Interface) project consists of a
@@ -49,5 +52,8 @@ mv bin/ %{buildroot}/opt/cni/
 /opt/cni
 
 %changelog
+% Wed Nov 26 2025 Daniel Krasinski <daniel.krasinski@oracle.com> - 1.3.0-2
+- Allow this package to fulfill requirements on the obsolete package kubernetes-cni
+
 * Fri Sep 19 2025 Olcne-Builder Jenkins <olcne-builder_us@oracle.com> - 1.3.0-1
 - Added Oracle specific build files for Kubernetes CNI Plugins
