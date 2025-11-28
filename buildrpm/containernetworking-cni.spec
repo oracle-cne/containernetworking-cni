@@ -52,7 +52,7 @@ mv bin/ %{buildroot}/opt/cni/
 /opt/cni
 
 %changelog
-% Wed Nov 26 2025 Daniel Krasinski <daniel.krasinski@oracle.com> - 1.3.0-2
+* Wed Nov 26 2025 Daniel Krasinski <daniel.krasinski@oracle.com> - 1.3.0-2
 - Allow this package to fulfill requirements on the obsolete package kubernetes-cni
 
 * Fri Sep 19 2025 Olcne-Builder Jenkins <olcne-builder_us@oracle.com> - 1.3.0-1
