@@ -21,6 +21,9 @@ Source:         %{name}-%{version}.tar.bz2
 BuildRequires:  golang >= %{golang_version}
 Requires:       flannel-cni-plugin >= 1.2.0
 
+Provides: kubernetes-cni = %{version}-%{release}
+Obsoletes: kubernetes-cni < 1.3.0
+
 %description
 The CNI (Container Network Interface) project consists of a
 specification and libraries for writing plugins to configure
