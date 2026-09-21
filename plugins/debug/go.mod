@@ -9,7 +9,7 @@ require (
 
 require (
 	github.com/vishvananda/netns v0.0.4 // indirect
-	golang.org/x/sys v0.15.0 // indirect
+	golang.org/x/sys v0.23.0 // indirect
 )
 
 replace github.com/containernetworking/cni => ../..
