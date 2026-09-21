@@ -1,6 +1,6 @@
 module github.com/containernetworking/cni/plugins/debug
 
-go 1.21
+go 1.26
 
 require (
 	github.com/containernetworking/cni v1.1.2
